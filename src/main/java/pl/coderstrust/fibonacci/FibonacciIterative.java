@@ -3,21 +3,21 @@ package pl.coderstrust.fibonacci;
 public class FibonacciIterative {
 
     public static long fibonacci(int fibonacciNumberInOrder) {
-        long result = 0;
-        long firstNumber = 0;
-        long secondNumber = 1;
-
-        if (fibonacciNumberInOrder <= 0) {
+        if (fibonacciNumberInOrder < 0) {
+            throw new IllegalArgumentException("fibonacciNumberInOrder must be positive");
+        }
+        if (fibonacciNumberInOrder == 0) {
             return 0;
-        } else if (fibonacciNumberInOrder == 1) {
+        }
+        if (fibonacciNumberInOrder == 1) {
             return 1;
         }
-
+        long[] fib = {0, 1, 1};
         for (int i = 0; i < fibonacciNumberInOrder - 1; i++) {
-            result = firstNumber + secondNumber;
-            firstNumber = secondNumber;
-            secondNumber = result;
+            fib[2] = fib[0] + fib[1];
+            fib[0] = fib[1];
+            fib[1] = fib[2];
         }
-        return result;
+        return fib[2];
     }
 }

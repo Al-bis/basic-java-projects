@@ -13,7 +13,6 @@ public class FibonacciRecursiveTest {
     @Test
     @Parameters(method = "inputData")
     public void fibonacciRecursiveResultCheck(long expectedValue, int fibonacciElement) {
-
         assertEquals(expectedValue, FibonacciRecursive.fibonacci(fibonacciElement));
     }
 

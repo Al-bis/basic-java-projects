@@ -13,7 +13,6 @@ public class FibonacciIterativeTest {
     @Test
     @Parameters(method = "inputData")
     public void fibonacciIterativeResultCheck(long expectedValue, int fibonacciElement) {
-
         assertEquals(expectedValue, FibonacciIterative.fibonacci(fibonacciElement));
     }
 
