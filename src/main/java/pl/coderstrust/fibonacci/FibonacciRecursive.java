@@ -6,7 +6,7 @@ public class FibonacciRecursive {
         if (fibonacciNumberInOrder < 0) {
             throw new IllegalArgumentException("fibonacciNumberInOrder must be positive");
         }
-        if (fibonacciNumberInOrder <= 0) {
+        if (fibonacciNumberInOrder == 0) {
             return 0;
         }
         if (fibonacciNumberInOrder <= 2) {
