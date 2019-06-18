@@ -24,10 +24,8 @@ public class FooBarTest {
         expected.add("7 ");
         expected.add("8 ");
         expected.add("9 Foo");
-
         //when
         List<String> actual = FooBar.getFooBar(10);
-
         //then
         assertThat(actual, is(expected));
     }
