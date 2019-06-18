@@ -12,10 +12,10 @@ public class MultiplicationTable {
 
     public static void printMultiplicationTable(int size) {
         if (size < 0) {
-            throw new IllegalArgumentException("Given size can't have a negative value");
+            throw new IllegalArgumentException("Given size cannot have a negative value");
         }
         if (size > 12) {
-            throw new IllegalArgumentException("Given size can't exceed 12");
+            throw new IllegalArgumentException("Given size cannot exceed 12");
         }
         System.out.printf("%6s", "");
         for (int i = 1; i <= size; i++) {
