@@ -1,32 +1,48 @@
 package pl.coderstrust.foobar;
 
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
+@RunWith(JUnitParamsRunner.class)
 public class FooBarTest {
 
     @Test
-    public void checkFooBarListSize10() {
+    public void shouldThrownException() {
         //given
-        List<String> expected = new ArrayList<>();
-        expected.add("0 FooBar");
-        expected.add("1 ");
-        expected.add("2 ");
-        expected.add("3 Foo");
-        expected.add("4 ");
-        expected.add("5 Bar");
-        expected.add("6 Foo");
-        expected.add("7 ");
-        expected.add("8 ");
-        expected.add("9 Foo");
+        Exception caughtException = null;
         //when
-        List<String> actual = FooBar.getFooBar(10);
+        try {
+            FooBar.getFooBar(-1);
+        } catch (Exception e) {
+            caughtException = e;
+        }
+        //then
+        assertEquals(IllegalArgumentException.class, caughtException.getClass());
+    }
+
+    @Test
+    @Parameters(method = "inputData")
+    public void shouldReturnCorrectFooBar(int amount, List<String> expected) {
+        //given
+        //when
+        List<String> actual = FooBar.getFooBar(amount);
         //then
         assertThat(actual, is(expected));
+    }
+
+    public Object[] inputData() {
+        return new Object[]{
+                new Object[]{10, Arrays.asList("0 FooBar", "1 ", "2 ", "3 Foo", "4 ", "5 Bar", "6 Foo", "7 ", "8 ", "9 Foo")},
+                new Object[]{5, Arrays.asList("0 FooBar", "1 ", "2 ", "3 Foo", "4 ")},
+        };
     }
 }
