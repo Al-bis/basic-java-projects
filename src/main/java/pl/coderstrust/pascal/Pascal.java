@@ -1,23 +1,40 @@
 package pl.coderstrust.pascal;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Pascal {
 
     public static void main(String[] args) {
-        printPascalTriangle(5);
+        try {
+            List<String> pascalTriangle = getPascalTriangle(7);
+            for (String s : pascalTriangle) {
+                System.out.println(s);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
-    public static void printPascalTriangle(int rows) {
+    public static List<String> getPascalTriangle(int rows) {
+        if (rows < 0) {
+            throw new IllegalArgumentException("Given rows cannot have a negative value");
+        }
+        List<String> result = new ArrayList<>();
+        StringBuilder line = new StringBuilder();
         long nodeValue;
         for (int i = 0; i < rows; i++) {
             for (int j = i; j <= rows; j++) {
-                System.out.printf("%3s", " ");
+                line.append(String.format("%3s", " "));
             }
             for (int j = 0; j <= i; j++) {
                 nodeValue = factorial(i) / (factorial(j) * factorial(i - j));
-                System.out.printf("%6d", nodeValue);
+                line.append(String.format("%6d", nodeValue));
             }
-            System.out.println();
+            result.add(line.toString());
+            line.setLength(0);
         }
+        return result;
     }
 
     private static long factorial(int number) {
