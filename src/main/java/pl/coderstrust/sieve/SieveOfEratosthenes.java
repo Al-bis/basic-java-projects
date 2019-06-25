@@ -4,8 +4,10 @@ import java.util.Arrays;
 
 public class SieveOfEratosthenes {
 
+    private static final int NON_PRIME_MARKER = 1;
+
     public static void main(String[] args) {
-        System.out.println(Arrays.toString(sieve(122)));
+        System.out.println(Arrays.toString(sieve(9)));
     }
 
     public static int[] sieve(int maximumNumber) {
@@ -13,43 +15,40 @@ public class SieveOfEratosthenes {
             return new int[0];
         }
         int[] array = createInitialArray(maximumNumber);
-        int countOfPrimeNumbers = markNonePrimeNumbers(array);
+        int countOfPrimeNumbers = maximumNumber - markNonePrimeNumbers(array);
         return extractPrimesNumbers(array, countOfPrimeNumbers);
     }
 
     private static int markNonePrimeNumbers(int[] array) {
-        for (int i = 2; i <= Math.sqrt(array.length - 1); i++) {
-            if (array[i] == 1) {
-                for (int j = (int) Math.pow(i, 2); j <= array.length - 1; j = j + i) {
-                    array[j] = 0;
+        int counter = 2;
+        for (int i = 2; (i * i) <= array.length; i++) {
+            if (array[i] == NON_PRIME_MARKER) {
+                for (int j = i; i * j <= array.length - 1; j++) {
+                    if (array[i * j] != NON_PRIME_MARKER) {
+                        array[i * j] = NON_PRIME_MARKER;
+                        counter++;
+                    }
                 }
             }
         }
-        int primaryAmount = 0;
-        for (int i = 0; i <= array.length - 1; i++) {
-            if (array[i] == 1) {
-                primaryAmount++;
-            }
-        }
-        return primaryAmount;
+        return counter;
     }
 
     private static int[] extractPrimesNumbers(int[] array, int countOfPrimeNumbers) {
         int[] primaryNumbers = new int[countOfPrimeNumbers];
         int position = 0;
-        for (int i = 0; i <= array.length - 1; i++) {
-            if (array[i] == 1) {
-                primaryNumbers[position] = i;
-                position++;
+        for (int i = 2; i < array.length; i++) {
+            if (array[i] == NON_PRIME_MARKER) {
+                primaryNumbers[position++] = array[i];
             }
         }
         return primaryNumbers;
     }
 
-    private static int[] createInitialArray(int maximumNumber) {
-        int[] numbers = new int[maximumNumber + 1];
-        for (int i = 2; i <= maximumNumber; i++) {
-            numbers[i] = 1;
+    private static int[] createInitialArray(int size) {
+        int[] numbers = new int[size + 1];
+        for (int i = 0; i < size; i++) {
+            numbers[i] = i;
         }
         return numbers;
     }
