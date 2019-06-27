@@ -16,29 +16,23 @@ public class FibonacciCheckerTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    @Parameters(method = "inputDataException")
-    public void shouldThrownException(long number) {
+    @Parameters({"-1", "-2", "-3"})
+    public void shouldThrownExceptionForInvalidArgument(long number) {
         thrown.expect(IllegalArgumentException.class);
         FibonacciChecker.isFibonacciNumber(number);
     }
 
     @Test
-    @Parameters(method = "inputData")
-    public void shouldReturnIfNumberIsFibonacci(long number, boolean expected) {
-        //given
+    @Parameters(method = "fibonacciArguments")
+    public void shouldCheckIsThatFibonacciNumber(long number, boolean expected) {
         //when
         boolean actual = FibonacciChecker.isFibonacciNumber(number);
+
         //then
         assertEquals(actual, expected);
     }
 
-    public Object[] inputDataException() {
-        return new Object[]{
-                new Object[]{-1}
-        };
-    }
-
-    public Object[] inputData() {
+    public Object[] fibonacciArguments() {
         return new Object[]{
                 new Object[]{1, true},
                 new Object[]{2, true},
