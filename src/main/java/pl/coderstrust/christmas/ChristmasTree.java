@@ -17,11 +17,11 @@ public class ChristmasTree {
     }
 
     public static List<String> getChristmasTree(int size) {
-        List<String> result = new ArrayList<>();
-        StringBuilder line = new StringBuilder();
         if (size < 0) {
             throw new IllegalArgumentException("Given size cannot have a negative value");
         }
+        List<String> result = new ArrayList<>();
+        StringBuilder line = new StringBuilder();
         int star = 1;
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size - i; j++) {
