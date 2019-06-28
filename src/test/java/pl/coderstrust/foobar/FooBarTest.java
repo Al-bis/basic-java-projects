@@ -38,8 +38,9 @@ public class FooBarTest {
 
     public Object[] fooBarArguments() {
         return new Object[]{
-                new Object[]{10, Arrays.asList("0 FooBar", "1 ", "2 ", "3 Foo", "4 ", "5 Bar", "6 Foo", "7 ", "8 ", "9 Foo")},
-                new Object[]{5, Arrays.asList("0 FooBar", "1 ", "2 ", "3 Foo", "4 ")},
+                new Object[]{10, Arrays.asList("0 FooBar", "1 ", "2 ", "3 Foo", "4 ", "5 Bar", "6 Foo", "7 ", "8 ", "9 Foo", "10 Bar")},
+                new Object[]{5, Arrays.asList("0 FooBar", "1 ", "2 ", "3 Foo", "4 ", "5 Bar")},
+                new Object[]{0, Arrays.asList("0 FooBar")}
         };
     }
 }
