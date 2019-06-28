@@ -29,11 +29,12 @@ public class FibonacciCheckerTest {
         boolean actual = FibonacciChecker.isFibonacciNumber(number);
 
         //then
-        assertEquals(actual, expected);
+        assertEquals(expected, actual);
     }
 
     public Object[] fibonacciArguments() {
         return new Object[]{
+                new Object[]{0, true},
                 new Object[]{1, true},
                 new Object[]{2, true},
                 new Object[]{4, false},

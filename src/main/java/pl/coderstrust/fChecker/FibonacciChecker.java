@@ -6,23 +6,17 @@ import java.util.Scanner;
 
 public class FibonacciChecker {
 
-    private static Map<Long, Boolean> numbers = new HashMap<>();
+    private static Map<Long, Boolean> cache = new HashMap<>();
 
     public static void main(String[] args) {
         Scanner scanner;
         long number = 0;
-        boolean result;
         try {
             while (number >= 0) {
                 scanner = new Scanner(System.in);
                 System.out.print("Provide number (negative will exit program): ");
                 number = scanner.nextLong();
-                if (numbers.containsKey(number)) {
-                    result = numbers.get(number);
-                } else {
-                    result = isFibonacciNumber(number);
-                }
-                System.out.println("Is " + number + " a fibonacci number?: " + result);
+                System.out.println("Is " + number + " a fibonacci number?: " + isFibonacciNumber(number));
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -33,11 +27,13 @@ public class FibonacciChecker {
         if (number < 0) {
             throw new IllegalArgumentException("Given number must be positive");
         }
-        boolean isFibonacciNumber;
+        if (cache.containsKey(number)) {
+            return cache.get(number);
+        }
         long formula1 = 5 * (number * number) + 4;
         long formula2 = 5 * (number * number) - 4;
-        isFibonacciNumber = isPerfectSquare(formula1) || isPerfectSquare(formula2);
-        numbers.put(number, isFibonacciNumber);
+        boolean isFibonacciNumber = isPerfectSquare(formula1) || isPerfectSquare(formula2);
+        cache.put(number, isFibonacciNumber);
         return isFibonacciNumber;
     }
 
