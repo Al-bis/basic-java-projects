@@ -49,7 +49,9 @@ public class ChristmasTreeTest {
                         "   *",
                         "  ***",
                         " *****",
-                        "  **")}
+                        "  **")},
+                new Object[]{0, Arrays.asList(
+                        "**")}
         };
     }
 }
