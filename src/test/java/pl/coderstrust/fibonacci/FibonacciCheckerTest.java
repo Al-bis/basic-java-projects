@@ -1,4 +1,4 @@
-package pl.coderstrust.fChecker;
+package pl.coderstrust.fibonacci;
 
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
