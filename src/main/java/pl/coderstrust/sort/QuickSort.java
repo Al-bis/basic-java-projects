@@ -1,4 +1,4 @@
-package pl.coderstrust.sortCompare;
+package pl.coderstrust.sort;
 
 import java.util.Arrays;
 

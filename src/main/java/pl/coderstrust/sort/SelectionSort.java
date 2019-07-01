@@ -2,9 +2,10 @@ package pl.coderstrust.sort;
 
 import java.util.Arrays;
 
-public class SelectionSort {
+public class SelectionSort implements SortingMethod {
 
-    public static int[] sort(int[] array) {
+    @Override
+    public int[] sort(int[] array) {
         int[] sortedArray = Arrays.copyOf(array, array.length);
         int min;
         int elementNumber;
@@ -17,9 +18,13 @@ public class SelectionSort {
                     elementNumber = j;
                 }
             }
-            sortedArray[elementNumber] = sortedArray[i];
-            sortedArray[i] = min;
+            swap(sortedArray, elementNumber, i, min);
         }
         return sortedArray;
+    }
+
+    private void swap(int[] array, int elementNumber, int i, int min) {
+        array[elementNumber] = array[i];
+        array[i] = min;
     }
 }
