@@ -11,7 +11,6 @@ public class CollectionsSort implements SortingMethod {
     public int[] sort(int[] array) {
         List<Integer> list = Arrays.stream(array).boxed().collect(Collectors.toList());
         Collections.sort(list);
-        int[] sortedArray = list.stream().mapToInt(Integer::intValue).toArray();
-        return sortedArray;
+        return list.stream().mapToInt(Integer::intValue).toArray();
     }
 }
