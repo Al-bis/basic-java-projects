@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class HoarePartition {
 
     public static void main(String[] args) {
-        int[] array = new int[]{1, 7, 9, 4, 3, 2, 8, 5, 4, 10, 5, 9, 11, 34, 2, 1, 9, 44, 4};
+        int[] array = {1, 7, 9, 4, 3, 2, 8, 5, 4, 10, 5, 9, 11, 34, 2, 1, 9, 44, 4};
         try {
             partition(array, 10);
             System.out.println("Partition result is: " + Arrays.toString(array));
