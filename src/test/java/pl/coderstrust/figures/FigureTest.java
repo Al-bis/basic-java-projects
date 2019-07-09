@@ -13,11 +13,8 @@ public class FigureTest {
     @Test
     @Parameters(method = "figureArguments")
     public void shouldCalculateCorrectFigureArea(Figure figure, double expected) {
-        //given
-        Figure givenFigure = figure;
-
         //when
-        double actual = givenFigure.calculateArea();
+        double actual = figure.calculateArea();
 
         //then
         assertEquals(expected, actual);
@@ -25,8 +22,11 @@ public class FigureTest {
 
     public Object[] figureArguments() {
         return new Object[]{
-                new Object[]{0, 0},
-                new Object[]{1, 1},
+                new Object[]{new Circle(2.0), 12.566370614359172},
+                new Object[]{new Rectangle(2.0, 2.0), 4.00},
+                new Object[]{new Square(2.0), 4.00},
+                new Object[]{new Trapezoid(2.0, 2.0, 2.0), 4.00},
+                new Object[]{new Triangle(2.0, 2.0), 2.00}
         };
     }
 }

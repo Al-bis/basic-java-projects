@@ -1,6 +1,6 @@
 package pl.coderstrust.figures;
 
-public class Square extends Rectangle implements Figure {
+public class Square implements Figure {
 
     private double side;
 
@@ -8,7 +8,6 @@ public class Square extends Rectangle implements Figure {
     }
 
     public Square(double side) {
-        super(side, side);
         this.side = side;
     }
 
@@ -16,14 +15,8 @@ public class Square extends Rectangle implements Figure {
         return side;
     }
 
-    @Override
-    public void setLength(double length) {
-        side = length;
-    }
-
-    @Override
-    public void setWidth(double width) {
-        side = width;
+    public void setSide(double side) {
+        this.side = side;
     }
 
     @Override
