@@ -23,6 +23,6 @@ public class TrapezoidTest {
         double actual = trapezoid.calculateArea();
 
         //then
-        assertEquals(expected, actual);
+        assertEquals(expected, actual, 1e-15);
     }
 }

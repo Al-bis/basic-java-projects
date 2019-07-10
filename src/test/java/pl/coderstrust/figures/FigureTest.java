@@ -17,7 +17,7 @@ public class FigureTest {
         double actual = figure.calculateArea();
 
         //then
-        assertEquals(expected, actual);
+        assertEquals(expected, actual, 1e-15);
     }
 
     public Object[] figureArguments() {

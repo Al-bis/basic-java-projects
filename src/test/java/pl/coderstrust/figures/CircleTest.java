@@ -23,6 +23,6 @@ public class CircleTest {
         double actual = circle.calculateArea();
 
         //then
-        assertEquals(expected, actual);
+        assertEquals(expected, actual, 1e-15);
     }
 }

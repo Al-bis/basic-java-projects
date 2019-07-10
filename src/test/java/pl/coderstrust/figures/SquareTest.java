@@ -23,6 +23,6 @@ public class SquareTest {
         double actual = square.calculateArea();
 
         //then
-        assertEquals(expected, actual);
+        assertEquals(expected, actual, 1e-15);
     }
 }

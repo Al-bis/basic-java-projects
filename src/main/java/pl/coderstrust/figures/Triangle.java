@@ -2,15 +2,14 @@ package pl.coderstrust.figures;
 
 public class Triangle implements Figure {
 
-    private double base;
-    private double height;
-
-    public Triangle() {
-    }
+    private double base = 0;
+    private double height = 0;
 
     public Triangle(double base, double height) {
-        this.base = base;
-        this.height = height;
+        if (base > 0 && height > 0) {
+            this.base = base;
+            this.height = height;
+        }
     }
 
     public double getBase() {

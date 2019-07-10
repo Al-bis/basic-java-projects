@@ -23,6 +23,6 @@ public class TriangleTest {
         double actual = triangle.calculateArea();
 
         //then
-        assertEquals(expected, actual);
+        assertEquals(expected, actual, 1e-15);
     }
 }

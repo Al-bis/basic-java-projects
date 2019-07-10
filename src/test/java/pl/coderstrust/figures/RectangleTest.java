@@ -23,6 +23,6 @@ public class RectangleTest {
         double actual = rectangle.calculateArea();
 
         //then
-        assertEquals(expected, actual);
+        assertEquals(expected, actual, 1e-15);
     }
 }

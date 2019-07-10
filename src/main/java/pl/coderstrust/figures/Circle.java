@@ -2,13 +2,12 @@ package pl.coderstrust.figures;
 
 public class Circle implements Figure {
 
-    private double radius;
-
-    public Circle() {
-    }
+    private double radius = 0;
 
     public Circle(double radius) {
-        this.radius = radius;
+        if (radius > 0) {
+            this.radius = radius;
+        }
     }
 
     public double getRadius() {

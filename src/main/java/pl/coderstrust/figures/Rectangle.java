@@ -2,23 +2,22 @@ package pl.coderstrust.figures;
 
 public class Rectangle implements Figure {
 
-    private double length;
-    private double width;
+    private double height = 0;
+    private double width = 0;
 
-    public Rectangle() {
+    public Rectangle(double height, double width) {
+        if (height > 0 && width > 0) {
+            this.height = height;
+            this.width = width;
+        }
     }
 
-    public Rectangle(double length, double width) {
-        this.length = length;
-        this.width = width;
+    public double getHeight() {
+        return height;
     }
 
-    public double getLength() {
-        return length;
-    }
-
-    public void setLength(double length) {
-        this.length = length;
+    public void setHeight(double height) {
+        this.height = height;
     }
 
     public double getWidth() {
@@ -31,13 +30,13 @@ public class Rectangle implements Figure {
 
     @Override
     public double calculateArea() {
-        return length * width;
+        return height * width;
     }
 
     @Override
     public String toString() {
         return "Rectangle{" +
-                "length=" + length +
+                "height=" + height +
                 ", width=" + width +
                 '}';
     }

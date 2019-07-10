@@ -2,13 +2,12 @@ package pl.coderstrust.figures;
 
 public class Square implements Figure {
 
-    private double side;
-
-    public Square() {
-    }
+    private double side = 0;
 
     public Square(double side) {
-        this.side = side;
+        if (side > 0) {
+            this.side = side;
+        }
     }
 
     public double getSide() {
