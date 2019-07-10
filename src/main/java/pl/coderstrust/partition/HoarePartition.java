@@ -4,42 +4,32 @@ import java.util.Arrays;
 
 public class HoarePartition {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IndexOutOfBoundsException {
         int[] array = {1, 7, 9, 4, 3, 2, 8, 5, 4, 10, 5, 9, 11, 34, 2, 1, 9, 44, 4};
-        try {
-            partition(array, 10);
-            System.out.println("Partition result is: " + Arrays.toString(array));
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println(e.getMessage());
-        }
+        int index = partition(array, 10);
+        System.out.println("Partition result is: " + Arrays.toString(array));
+        System.out.println("Index: " + index);
     }
 
-    public static void partition(int[] array, int pivotIndex) {
-        if (pivotIndex > array.length) {
-            throw new IndexOutOfBoundsException("Given pivot index cannot exceed length of array");
-        }
-        if (array.length < 2) {
-            return;
+    public static int partition(int[] array, int pivotIndex) {
+        if (array.length == 1) {
+            return 0;
         }
         int start = 0;
         int end = array.length - 1;
         int pivot = array[pivotIndex];
-        swap(array, start, pivotIndex);
+        if (pivotIndex != 0) {
+            swap(array, start, pivotIndex);
+        }
         start++;
         int lastLowerIndex = start;
         do {
-            while (array[start] <= pivot) {
+            while (start != array.length && array[start] <= pivot) {
                 lastLowerIndex = start;
                 start++;
-                if (start == array.length) {
-                    break;
-                }
             }
             while (array[end] > pivot) {
                 end--;
-                if (end < 0) {
-                    break;
-                }
             }
             if (start <= end) {
                 swap(array, start, end);
@@ -50,7 +40,9 @@ public class HoarePartition {
         } while (start <= end);
         if (array[lastLowerIndex] <= array[0]) {
             swap(array, 0, lastLowerIndex);
+            return lastLowerIndex;
         }
+        return 0;
     }
 
     private static void swap(int[] array, int s, int e) {

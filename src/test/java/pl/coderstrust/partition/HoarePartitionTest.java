@@ -16,19 +16,9 @@ public class HoarePartitionTest {
 
     @Test
     @Parameters(method = "ExceptionArguments")
-    public void shouldThrowExceptionForInvalidArgument(int[] array, int pivotIndex) {
+    public void shouldThrowExceptionForInvalidPivotIndex(int[] array, int pivotIndex) {
         thrown.expect(IndexOutOfBoundsException.class);
         HoarePartition.partition(array, pivotIndex);
-    }
-
-    @Test
-    @Parameters(method = "HoarePartitionArguments")
-    public void shouldReturnCorrectHoarePartition(int[] actual, int pivotIndex, int[] expected) {
-        //when
-        HoarePartition.partition(actual, pivotIndex);
-
-        //then
-        Assert.assertArrayEquals(expected, actual);
     }
 
     public Object[] ExceptionArguments() {
@@ -37,19 +27,50 @@ public class HoarePartitionTest {
         };
     }
 
+    @Test
+    @Parameters(method = "HoarePartitionArguments")
+    public void shouldReturnCorrectHoarePartition(int[] actual, int pivotIndex) {
+        //when
+        int index = HoarePartition.partition(actual, pivotIndex);
+        boolean leftSide = isLeftSideElementsLowerOrEqualsIndexValue(actual, index);
+        boolean rightSide = isRightSideElementsBiggerThanIndexValue(actual, index);
+
+        //then
+        Assert.assertTrue(leftSide);
+        Assert.assertTrue(rightSide);
+    }
+
+    private boolean isLeftSideElementsLowerOrEqualsIndexValue(int[] actual, int index) {
+        for (int i = 0; i < index; i++) {
+            if (actual[i] > actual[index]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean isRightSideElementsBiggerThanIndexValue(int[] actual, int index) {
+        for (int i = index + 1; i < actual.length; i++) {
+            if (actual[i] <= actual[index]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public Object[] HoarePartitionArguments() {
         return new Object[]{
-                new Object[]{new int[]{1, 7, 9, 4, 3, 2, 8, 5}, 0, new int[]{1, 7, 9, 4, 3, 2, 8, 5}},
-                new Object[]{new int[]{1, 7, 9, 4, 3, 2, 8, 5}, 1, new int[]{2, 1, 5, 4, 3, 7, 8, 9}},
-                new Object[]{new int[]{1, 7, 9, 4, 3, 2, 8, 5}, 2, new int[]{5, 7, 1, 4, 3, 2, 8, 9}},
-                new Object[]{new int[]{1, 7, 9, 4, 3, 2, 8, 5}, 3, new int[]{1, 2, 3, 4, 9, 7, 8, 5}},
-                new Object[]{new int[]{1, 7, 9, 4, 3, 2, 8, 5}, 4, new int[]{1, 2, 3, 4, 9, 7, 8, 5}},
-                new Object[]{new int[]{1, 7, 9, 4, 3, 2, 8, 5}, 5, new int[]{1, 2, 9, 4, 3, 7, 8, 5}},
-                new Object[]{new int[]{1, 7, 9, 4, 3, 2, 8, 5}, 6, new int[]{1, 7, 5, 4, 3, 2, 8, 9}},
-                new Object[]{new int[]{1, 7, 9, 4, 3, 2, 8, 5}, 7, new int[]{3, 1, 2, 4, 5, 9, 8, 7}},
-                new Object[]{new int[]{3, 7, 9, 4, 1, 2, 8, 5}, 4, new int[]{1, 7, 9, 4, 3, 2, 8, 5}},
-                new Object[]{new int[]{2, 1, 2, 2, 1, 3, 3, 2}, 3, new int[]{2, 1, 2, 2, 1, 2, 3, 3}},
-                new Object[]{new int[]{2, 1, 2, 2, 1, 3, 3, 2}, 1, new int[]{1, 1, 2, 2, 2, 3, 3, 2}}
+                new Object[]{new int[]{1, 7, 9, 4, 3, 2, 8, 5}, 0},
+                new Object[]{new int[]{1, 7, 9, 4, 3, 2, 8, 5}, 1},
+                new Object[]{new int[]{1, 7, 9, 4, 3, 2, 8, 5}, 2},
+                new Object[]{new int[]{1, 7, 9, 4, 3, 2, 8, 5}, 3},
+                new Object[]{new int[]{1, 7, 9, 4, 3, 2, 8, 5}, 4},
+                new Object[]{new int[]{1, 7, 9, 4, 3, 2, 8, 5}, 5},
+                new Object[]{new int[]{1, 7, 9, 4, 3, 2, 8, 5}, 6},
+                new Object[]{new int[]{1, 7, 9, 4, 3, 2, 8, 5}, 7},
+                new Object[]{new int[]{3, 7, 9, 4, 1, 2, 8, 5}, 4},
+                new Object[]{new int[]{2, 1, 2, 2, 1, 3, 3, 2}, 3},
+                new Object[]{new int[]{2, 1, 2, 2, 1, 3, 3, 2}, 1}
         };
     }
 }
