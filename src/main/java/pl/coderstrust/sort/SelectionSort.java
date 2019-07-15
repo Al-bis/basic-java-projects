@@ -8,23 +8,21 @@ public class SelectionSort implements SortingMethod {
     public int[] sort(int[] array) {
         int[] sortedArray = Arrays.copyOf(array, array.length);
         int min;
-        int elementNumber;
-        for (int i = 0; i < array.length; i++) {
-            min = sortedArray[i];
-            elementNumber = 0 + i;
-            for (int j = 0 + i; j < array.length; j++) {
-                if (sortedArray[j] <= min) {
-                    min = sortedArray[j];
-                    elementNumber = j;
+        for (int i = 0; i < array.length - 1; i++) {
+            min = i;
+            for (int j = i + 1; j < array.length; j++) {
+                if (sortedArray[j] < sortedArray[min]) {
+                    min = j;
                 }
             }
-            swap(sortedArray, elementNumber, i, min);
+            swap(sortedArray, min, i);
         }
         return sortedArray;
     }
 
-    private void swap(int[] array, int elementNumber, int i, int min) {
-        array[elementNumber] = array[i];
-        array[i] = min;
+    private static void swap(int[] array, int a, int b) {
+        int temp = array[a];
+        array[a] = array[b];
+        array[b] = temp;
     }
 }
