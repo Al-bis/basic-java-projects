@@ -2,16 +2,17 @@ package pl.coderstrust.figures;
 
 public class Trapezoid implements Figure {
 
-    private double lowerBase = 0;
-    private double higherBase = 0;
-    private double height = 0;
+    private double lowerBase;
+    private double higherBase;
+    private double height;
 
     public Trapezoid(double lowerBase, double higherBase, double height) {
-        if (lowerBase > 0 && higherBase > 0 && height > 0) {
-            this.lowerBase = lowerBase;
-            this.higherBase = higherBase;
-            this.height = height;
+        if (lowerBase <= 0 || higherBase <= 0 || height <= 0) {
+            throw new IllegalArgumentException("Arguments cannot be lower or equals 0");
         }
+        this.lowerBase = lowerBase;
+        this.higherBase = higherBase;
+        this.height = height;
     }
 
     public double getLowerBase() {
