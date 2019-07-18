@@ -18,6 +18,9 @@ public class Rectangle implements Figure {
     }
 
     public void setHeight(double height) {
+        if (height <= 0) {
+            throw new IllegalArgumentException("Argument cannot be lower or equals 0");
+        }
         this.height = height;
     }
 
@@ -26,6 +29,9 @@ public class Rectangle implements Figure {
     }
 
     public void setWidth(double width) {
+        if (width <= 0) {
+            throw new IllegalArgumentException("Argument cannot be lower or equals 0");
+        }
         this.width = width;
     }
 

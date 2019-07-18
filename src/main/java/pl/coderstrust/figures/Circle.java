@@ -6,7 +6,7 @@ public class Circle implements Figure {
 
     public Circle(double radius) {
         if (radius <= 0) {
-            throw new IllegalArgumentException("Arguments cannot be lower or equals 0");
+            throw new IllegalArgumentException("Argument cannot be lower or equals 0");
         }
         this.radius = radius;
     }
@@ -16,6 +16,9 @@ public class Circle implements Figure {
     }
 
     public void setRadius(double radius) {
+        if (radius <= 0) {
+            throw new IllegalArgumentException("Argument cannot be lower or equals 0");
+        }
         this.radius = radius;
     }
 
