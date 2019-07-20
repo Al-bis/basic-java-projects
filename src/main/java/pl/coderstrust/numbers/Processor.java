@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Processor {
-    //which should be the entry point of the application responsible
-    // for delegating particular tasks to File and Numbers Processors.
 
     private NumbersProcessor numbersProcessor;
     private FileProcessor fileProcessor;
@@ -17,10 +15,21 @@ public class Processor {
 
     public void process(String fileName, String resultFileName) {
         List<String> linesFromFile = fileProcessor.readLinesFromFile(fileName);
+        List<String> linesWithNumbers = extractNumbers(linesFromFile);
         List<String> resultLines = new ArrayList<>();
-        for (String line : linesFromFile) {
+        for (String line : linesWithNumbers) {
             resultLines.add(numbersProcessor.processLine(line));
         }
         fileProcessor.writeLinesToFile(resultLines, resultFileName);
+    }
+
+    private List<String> extractNumbers(List<String> linesFromFile) {
+        List<String> linesWithNumbers = new ArrayList<>();
+        for (String line : linesFromFile) {
+            if (line.matches("^[ 0-9]+$")) {
+                linesWithNumbers.add(line);
+            }
+        }
+        return linesWithNumbers;
     }
 }
