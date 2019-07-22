@@ -6,7 +6,7 @@ public class Square implements Figure {
 
     public Square(double side) {
         if (side <= 0) {
-            throw new IllegalArgumentException("Argument cannot be lower or equals 0");
+            throw new IllegalArgumentException("Side cannot be lower or equal 0");
         }
         this.side = side;
     }
@@ -17,7 +17,7 @@ public class Square implements Figure {
 
     public void setSide(double side) {
         if (side <= 0) {
-            throw new IllegalArgumentException("Argument cannot be lower or equals 0");
+            throw new IllegalArgumentException("Side cannot be lower or equal 0");
         }
         this.side = side;
     }

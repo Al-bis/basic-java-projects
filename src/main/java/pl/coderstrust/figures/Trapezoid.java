@@ -7,8 +7,14 @@ public class Trapezoid implements Figure {
     private double height;
 
     public Trapezoid(double lowerBase, double higherBase, double height) {
-        if (lowerBase <= 0 || higherBase <= 0 || height <= 0) {
-            throw new IllegalArgumentException("Arguments cannot be lower or equals 0");
+        if (lowerBase <= 0) {
+            throw new IllegalArgumentException("LowerBase cannot be lower or equal 0");
+        }
+        if (higherBase <= 0) {
+            throw new IllegalArgumentException("HigherBase cannot be lower or equal 0");
+        }
+        if (height <= 0) {
+            throw new IllegalArgumentException("Height cannot be lower or equal 0");
         }
         this.lowerBase = lowerBase;
         this.higherBase = higherBase;
@@ -21,7 +27,7 @@ public class Trapezoid implements Figure {
 
     public void setLowerBase(double lowerBase) {
         if (lowerBase <= 0) {
-            throw new IllegalArgumentException("Argument cannot be lower or equals 0");
+            throw new IllegalArgumentException("LowerBase cannot be lower or equal 0");
         }
         this.lowerBase = lowerBase;
     }
@@ -32,7 +38,7 @@ public class Trapezoid implements Figure {
 
     public void setHigherBase(double higherBase) {
         if (higherBase <= 0) {
-            throw new IllegalArgumentException("Argument cannot be lower or equals 0");
+            throw new IllegalArgumentException("HigherBase cannot be lower or equal 0");
         }
         this.higherBase = higherBase;
     }
@@ -43,7 +49,7 @@ public class Trapezoid implements Figure {
 
     public void setHeight(double height) {
         if (height <= 0) {
-            throw new IllegalArgumentException("Argument cannot be lower or equals 0");
+            throw new IllegalArgumentException("Height cannot be lower or equal 0");
         }
         this.height = height;
     }

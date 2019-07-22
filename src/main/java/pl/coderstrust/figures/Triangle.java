@@ -6,8 +6,11 @@ public class Triangle implements Figure {
     private double height;
 
     public Triangle(double base, double height) {
-        if (height <= 0 || base <= 0) {
-            throw new IllegalArgumentException("Arguments cannot be lower or equals 0");
+        if (height <= 0) {
+            throw new IllegalArgumentException("Height cannot be lower or equal 0");
+        }
+        if (base <= 0) {
+            throw new IllegalArgumentException("Base cannot be lower or equal 0");
         }
         this.base = base;
         this.height = height;
@@ -19,7 +22,7 @@ public class Triangle implements Figure {
 
     public void setBase(double base) {
         if (base <= 0) {
-            throw new IllegalArgumentException("Argument cannot be lower or equals 0");
+            throw new IllegalArgumentException("Base cannot be lower or equal 0");
         }
         this.base = base;
     }
@@ -30,7 +33,7 @@ public class Triangle implements Figure {
 
     public void setHeight(double height) {
         if (height <= 0) {
-            throw new IllegalArgumentException("Arguments cannot be lower or equals 0");
+            throw new IllegalArgumentException("Height cannot be lower or equal 0");
         }
         this.height = height;
     }

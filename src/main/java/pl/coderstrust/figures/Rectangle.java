@@ -6,8 +6,11 @@ public class Rectangle implements Figure {
     private double width;
 
     public Rectangle(double height, double width) {
-        if (height <= 0 || width <= 0) {
-            throw new IllegalArgumentException("Arguments cannot be lower or equals 0");
+        if (height <= 0) {
+            throw new IllegalArgumentException("Height cannot be lower or equal 0");
+        }
+        if (width <= 0) {
+            throw new IllegalArgumentException("Width cannot be lower or equal 0");
         }
         this.height = height;
         this.width = width;
@@ -19,7 +22,7 @@ public class Rectangle implements Figure {
 
     public void setHeight(double height) {
         if (height <= 0) {
-            throw new IllegalArgumentException("Argument cannot be lower or equals 0");
+            throw new IllegalArgumentException("Height cannot be lower or equal 0");
         }
         this.height = height;
     }
@@ -30,7 +33,7 @@ public class Rectangle implements Figure {
 
     public void setWidth(double width) {
         if (width <= 0) {
-            throw new IllegalArgumentException("Argument cannot be lower or equals 0");
+            throw new IllegalArgumentException("Width cannot be lower or equal 0");
         }
         this.width = width;
     }

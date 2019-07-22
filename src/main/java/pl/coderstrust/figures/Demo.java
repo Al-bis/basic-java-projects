@@ -3,7 +3,7 @@ package pl.coderstrust.figures;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main {
+public class Demo {
 
     public static void main(String[] args) {
         List<Figure> figures = new ArrayList<>();
