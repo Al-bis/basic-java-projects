@@ -1,10 +1,10 @@
 package pl.coderstrust.sort;
 
-public class SelectionSortTest extends SortingTestBase {
+public class MergeSortTest extends SortingTestBase {
 
     @Override
     public SortingMethod getSortingMethod() {
-        return new SelectionSort();
+        return new MergeSort();
     }
 
 }
