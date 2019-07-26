@@ -1,6 +1,6 @@
 package pl.coderstrust.numbers;
 
-public class Main {
+public class Demo {
 
     public static void main(String[] args) {
         NumbersProcessor numbersProcessor = new NumbersProcessor();

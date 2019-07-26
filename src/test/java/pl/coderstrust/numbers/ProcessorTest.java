@@ -24,16 +24,17 @@ public class ProcessorTest {
     @Test
     public void shouldProcessProvidedInputFileAndSaveResultToProvidedOutputFile() {
         // given
-        when(fileProcessor.readLinesFromFile("fileName.txt")).thenReturn(Arrays.asList("1 2 3", "4 5 6"));
+        when(fileProcessor.readLinesFromFile("fileName.txt")).thenReturn(Arrays.asList("1 2 3", "4 5 6", "7 8 9"));
         when(numbersProcessor.processLine("1 2 3")).thenReturn("1+2+3=6");
         when(numbersProcessor.processLine("4 5 6")).thenReturn("4+5+6=15");
+        when(numbersProcessor.processLine("7 8 9")).thenReturn("7+8+9=24");
 
         // when
         processor.process("fileName.txt", "output.txt");
 
         // then
-        verify(fileProcessor, times(1)).readLinesFromFile("fileName.txt");
-        //verify(numbersProcessor, times(2)).processLine();
-        //verify(fileProcessor).writeLinesToFile(...
+        verify(fileProcessor, times(1)).readLinesFromFile(anyString());
+        verify(numbersProcessor, times(3)).processLine(anyString());
+        verify(fileProcessor, times(1)).writeLinesToFile(anyList(), anyString());
     }
 }

@@ -1,26 +1,20 @@
 package pl.coderstrust.numbers;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class FileProcessor {
 
     public List<String> readLinesFromFile(String fileName) throws CustomException {
         List<String> lines = new ArrayList<>();
-        File file = new File(fileName);
-        try (Scanner scanner = new Scanner(file)) {
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                lines.add(line);
-            }
-        } catch (FileNotFoundException e) {
+        try (BufferedReader reader = Files.newBufferedReader(Paths.get(fileName))) {
+            reader.lines().forEach((line) -> lines.add(line));
+        } catch (IOException e) {
             throw new CustomException("File not found", e);
         }
         return lines;
@@ -29,7 +23,8 @@ public class FileProcessor {
     public void writeLinesToFile(List<String> resultLines, String resultFileName) throws CustomException {
         try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(resultFileName))) {
             for (String line : resultLines) {
-                writer.write(line + "\n");
+                writer.write(line);
+                writer.newLine();
             }
         } catch (IOException e) {
             throw new CustomException("Couldn't write to file", e);
