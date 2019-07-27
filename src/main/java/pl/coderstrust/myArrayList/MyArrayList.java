@@ -8,20 +8,36 @@ import java.util.function.UnaryOperator;
 import java.util.stream.Stream;
 
 public class MyArrayList implements List<Long> {
-    ArrayList<Long> l = new ArrayList<>();
+
+    private int size;
+    private int capacity;
+    private Long[] array;
+
+    ArrayList<Long> ar = new ArrayList<>();
+
+    public MyArrayList() {
+        size = 0;
+        capacity = 10;
+        array = new Long[capacity];
+    }
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return size == 0;
     }
 
     @Override
     public boolean contains(Object o) {
+        for (int i = 0; i < size; i++) {
+            if (o.equals(array[i])) {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -45,14 +61,24 @@ public class MyArrayList implements List<Long> {
         return null;
     }
 
-    @Override
+    //@Override
     public <T> T[] toArray(IntFunction<T[]> generator) {
         return null;
     }
 
     @Override
     public boolean add(Long aLong) {
-        return false;
+        if (size == capacity) {
+            capacity *= 2;
+            Long[] tempArray = new Long[capacity];
+            for (int i = 0; i < size; i++) {
+                tempArray[i] = array[i];
+            }
+            array = tempArray;
+        }
+        array[size] = aLong;
+        size++;
+        return true;
     }
 
     @Override
