@@ -1,11 +1,11 @@
 package pl.coderstrust.figures;
 
-public class Rectangle implements Figure {
+class Rectangle implements Figure {
 
     private double height;
     private double width;
 
-    public Rectangle(double height, double width) {
+    Rectangle(double height, double width) {
         if (height <= 0) {
             throw new IllegalArgumentException("Height cannot be lower or equal 0");
         }
@@ -16,22 +16,22 @@ public class Rectangle implements Figure {
         this.width = width;
     }
 
-    public double getHeight() {
+    double getHeight() {
         return height;
     }
 
-    public void setHeight(double height) {
+    void setHeight(double height) {
         if (height <= 0) {
             throw new IllegalArgumentException("Height cannot be lower or equal 0");
         }
         this.height = height;
     }
 
-    public double getWidth() {
+    double getWidth() {
         return width;
     }
 
-    public void setWidth(double width) {
+    void setWidth(double width) {
         if (width <= 0) {
             throw new IllegalArgumentException("Width cannot be lower or equal 0");
         }

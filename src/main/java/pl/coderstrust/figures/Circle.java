@@ -1,21 +1,21 @@
 package pl.coderstrust.figures;
 
-public class Circle implements Figure {
+class Circle implements Figure {
 
     private double radius;
 
-    public Circle(double radius) {
+    Circle(double radius) {
         if (radius <= 0) {
             throw new IllegalArgumentException("Radius cannot be lower or equal 0");
         }
         this.radius = radius;
     }
 
-    public double getRadius() {
+    double getRadius() {
         return radius;
     }
 
-    public void setRadius(double radius) {
+    void setRadius(double radius) {
         if (radius <= 0) {
             throw new IllegalArgumentException("Radius cannot be lower or equal 0");
         }

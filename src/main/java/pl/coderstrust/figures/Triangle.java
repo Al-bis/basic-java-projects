@@ -1,11 +1,11 @@
 package pl.coderstrust.figures;
 
-public class Triangle implements Figure {
+class Triangle implements Figure {
 
     private double base;
     private double height;
 
-    public Triangle(double base, double height) {
+    Triangle(double base, double height) {
         if (height <= 0) {
             throw new IllegalArgumentException("Height cannot be lower or equal 0");
         }
@@ -16,22 +16,22 @@ public class Triangle implements Figure {
         this.height = height;
     }
 
-    public double getBase() {
+    double getBase() {
         return base;
     }
 
-    public void setBase(double base) {
+    void setBase(double base) {
         if (base <= 0) {
             throw new IllegalArgumentException("Base cannot be lower or equal 0");
         }
         this.base = base;
     }
 
-    public double getHeight() {
+    double getHeight() {
         return height;
     }
 
-    public void setHeight(double height) {
+    void setHeight(double height) {
         if (height <= 0) {
             throw new IllegalArgumentException("Height cannot be lower or equal 0");
         }

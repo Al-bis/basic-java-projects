@@ -1,12 +1,12 @@
 package pl.coderstrust.figures;
 
-public class Trapezoid implements Figure {
+class Trapezoid implements Figure {
 
     private double lowerBase;
     private double higherBase;
     private double height;
 
-    public Trapezoid(double lowerBase, double higherBase, double height) {
+    Trapezoid(double lowerBase, double higherBase, double height) {
         if (lowerBase <= 0) {
             throw new IllegalArgumentException("LowerBase cannot be lower or equal 0");
         }
@@ -21,33 +21,33 @@ public class Trapezoid implements Figure {
         this.height = height;
     }
 
-    public double getLowerBase() {
+    double getLowerBase() {
         return lowerBase;
     }
 
-    public void setLowerBase(double lowerBase) {
+    void setLowerBase(double lowerBase) {
         if (lowerBase <= 0) {
             throw new IllegalArgumentException("LowerBase cannot be lower or equal 0");
         }
         this.lowerBase = lowerBase;
     }
 
-    public double getHigherBase() {
+    double getHigherBase() {
         return higherBase;
     }
 
-    public void setHigherBase(double higherBase) {
+    void setHigherBase(double higherBase) {
         if (higherBase <= 0) {
             throw new IllegalArgumentException("HigherBase cannot be lower or equal 0");
         }
         this.higherBase = higherBase;
     }
 
-    public double getHeight() {
+    double getHeight() {
         return height;
     }
 
-    public void setHeight(double height) {
+    void setHeight(double height) {
         if (height <= 0) {
             throw new IllegalArgumentException("Height cannot be lower or equal 0");
         }
