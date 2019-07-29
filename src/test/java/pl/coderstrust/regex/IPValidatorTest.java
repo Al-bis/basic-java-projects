@@ -69,11 +69,11 @@ public class IPValidatorTest {
             boolean valid1 = ipValidator.isIpAddress(i + ".1.1.1");
             assertTrue(valid1);
             boolean valid2 = ipValidator.isIpAddress("1." + i + ".1.1");
-            assertTrue(valid1);
+            assertTrue(valid2);
             boolean valid3 = ipValidator.isIpAddress("1.1." + i + ".1");
-            assertTrue(valid1);
+            assertTrue(valid3);
             boolean valid4 = ipValidator.isIpAddress("1.1.1." + i);
-            assertTrue(valid1);
+            assertTrue(valid4);
         }
     }
 }
