@@ -3,7 +3,9 @@ package pl.coderstrust.regex;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 
 import static org.junit.Assert.assertFalse;
@@ -11,6 +13,22 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(JUnitParamsRunner.class)
 public class IpAddressValidatorTest {
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
+    @Test
+    @Parameters(method = "nullArgument")
+    public void shouldThrowExceptionForIllegalArgument(String ipAddress) {
+        thrown.expect(IllegalArgumentException.class);
+        IpAddressValidator.isIpAddress(ipAddress);
+    }
+
+    public Object[] nullArgument() {
+        return new Object[]{
+                new Object[]{null}
+        };
+    }
 
     @Test
     @Parameters(method = "correctIpAddresses")
