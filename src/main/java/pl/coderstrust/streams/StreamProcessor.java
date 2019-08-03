@@ -7,7 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
-public class OnlyStreams {
+public class StreamProcessor {
 
     public static void main(String[] args) throws IOException {
         Path input = Paths.get("src/main/resources/1000.txt");
@@ -16,7 +16,7 @@ public class OnlyStreams {
             Files.lines(input)
                     .filter(line -> line.matches("^[ 0-9]+$"))
                     .map(string -> string.split(" +"))
-                    .map(OnlyStreams::convert)
+                    .map(StreamProcessor::convert)
                     .forEach(row -> pw.write(row + "\n"));
         }
     }
