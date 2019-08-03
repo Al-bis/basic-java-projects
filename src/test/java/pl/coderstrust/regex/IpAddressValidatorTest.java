@@ -2,6 +2,7 @@ package pl.coderstrust.regex;
 
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -46,24 +47,25 @@ public class IpAddressValidatorTest {
         };
     }
 
+    @Ignore
     @Test
     public void shouldReturnTrueForAllCombinationsOfIpAddresses() {
-//        for (int i = 0; i < 256; i++) {
-//            for (int j = 0; j < 256; j++) {
-//                for (int k = 0; k < 256; k++) {
-//                    for (int l = 0; l < 256; l++) {
-//                        assertTrue(IpAddressValidator.isIpAddress(i + "." + j + "." + k + "." + l));
-//                    }
-//                }
-//            }
-//        }
+        for (int i = 0; i < 256; i++) {
+            for (int j = 0; j < 256; j++) {
+                for (int k = 0; k < 256; k++) {
+                    for (int l = 0; l < 256; l++) {
+                        assertTrue(IpAddressValidator.isIpAddress(String.format("%d.%d.%d.%d", i, j, k, l)));
+                    }
+                }
+            }
+        }
     }
 
     @Test
-    @Parameters({"%d.%d.%d.%d"})
+    @Parameters({"%d.1.1.1", "1.%d.1.1", "1.1.%d.1", "1.1.1.%d"})
     public void smartTestForValidIpAddress(String ipAddressTemplate) {
         for (int i = 0; i < 256; i++) {
-            assertTrue(IpAddressValidator.isIpAddress(String.format(ipAddressTemplate, i, i, i, i)));
+            assertTrue(IpAddressValidator.isIpAddress(String.format(ipAddressTemplate, i)));
         }
     }
 }
