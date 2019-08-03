@@ -22,7 +22,7 @@ public class FileProcessorTest {
     @Test
     @Parameters({"fileNotFound.txt"})
     public void shouldThrownExceptionWhenFileNotFound(String fileName) {
-        thrown.expect(CustomException.class);
+        thrown.expect(FileProcessorException.class);
         FileProcessor fileProcessor = new FileProcessor();
         fileProcessor.readLinesFromFile("src/test/resources/" + fileName);
     }

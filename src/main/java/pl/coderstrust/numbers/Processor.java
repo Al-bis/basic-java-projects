@@ -13,14 +13,14 @@ public class Processor {
         this.fileProcessor = fileProcessor;
     }
 
-    public void process(String fileName, String resultFileName) {
-        List<String> linesFromFile = fileProcessor.readLinesFromFile(fileName);
+    public void process(String filePath, String resultFilePath) {
+        List<String> linesFromFile = fileProcessor.readLinesFromFile(filePath);
         List<String> linesWithNumbers = extractNumbers(linesFromFile);
         List<String> resultLines = new ArrayList<>();
         for (String line : linesWithNumbers) {
             resultLines.add(numbersProcessor.processLine(line));
         }
-        fileProcessor.writeLinesToFile(resultLines, resultFileName);
+        fileProcessor.writeLinesToFile(resultLines, resultFilePath);
     }
 
     private List<String> extractNumbers(List<String> linesFromFile) {

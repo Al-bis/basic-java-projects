@@ -3,9 +3,9 @@ package pl.coderstrust.numbers;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class NumbersProcessor {
+class NumbersProcessor {
 
-    public String processLine(String line) {
+    String processLine(String line) {
         String[] numbers = line.split(" +");
 
         String joined = Stream.of(numbers)
@@ -17,6 +17,7 @@ public class NumbersProcessor {
                 .map(Integer::parseInt)
                 .collect(Collectors.summingInt(value -> value));
 
-        return joined + "=" + sum;
+        return String.format("%s=%d", joined, sum);
     }
+
 }
