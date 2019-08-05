@@ -1,24 +1,29 @@
 package pl.coderstrust.myArrayList;
 
 import java.util.*;
-import java.util.function.Consumer;
-import java.util.function.IntFunction;
-import java.util.function.Predicate;
-import java.util.function.UnaryOperator;
-import java.util.stream.Stream;
 
-public class MyArrayList implements List<Long> {
+public class MyArrayList<Long> implements List<Long> {
 
     private int size;
     private int capacity;
-    private Long[] array;
-
-    ArrayList<Long> ar = new ArrayList<>();
+    private Object[] array;
 
     public MyArrayList() {
         size = 0;
         capacity = 10;
-        array = new Long[capacity];
+        array = new Object[capacity];
+    }
+
+    public MyArrayList(int initCapacity) {
+        if (initCapacity <= 0) {
+            throw new IllegalArgumentException("Illegal capacity:" + initCapacity);
+        } else if (initCapacity < 10) {
+            capacity = 10;
+        } else {
+            size = 0;
+            capacity = initCapacity;
+            array = new Object[capacity];
+        }
     }
 
     @Override
@@ -47,11 +52,6 @@ public class MyArrayList implements List<Long> {
     }
 
     @Override
-    public void forEach(Consumer<? super Long> action) {
-
-    }
-
-    @Override
     public Object[] toArray() {
         return new Object[0];
     }
@@ -61,23 +61,12 @@ public class MyArrayList implements List<Long> {
         return null;
     }
 
-    //@Override
-    public <T> T[] toArray(IntFunction<T[]> generator) {
-        return null;
-    }
-
     @Override
-    public boolean add(Long aLong) {
+    public boolean add(Long element) {
         if (size == capacity) {
-            capacity *= 2;
-            Long[] tempArray = new Long[capacity];
-            for (int i = 0; i < size; i++) {
-                tempArray[i] = array[i];
-            }
-            array = tempArray;
+            array = Arrays.copyOf(array, capacity * 2);
         }
-        array[size] = aLong;
-        size++;
+        array[size++] = element;
         return true;
     }
 
@@ -107,23 +96,8 @@ public class MyArrayList implements List<Long> {
     }
 
     @Override
-    public boolean removeIf(Predicate<? super Long> filter) {
-        return false;
-    }
-
-    @Override
     public boolean retainAll(Collection<?> c) {
         return false;
-    }
-
-    @Override
-    public void replaceAll(UnaryOperator<Long> operator) {
-
-    }
-
-    @Override
-    public void sort(Comparator<? super Long> c) {
-
     }
 
     @Override
@@ -133,12 +107,20 @@ public class MyArrayList implements List<Long> {
 
     @Override
     public Long get(int index) {
-        return null;
+        if (index >= size) {
+            throw new IllegalArgumentException("Given index is out of list size.");
+        }
+        return (Long) array[index];
     }
 
     @Override
     public Long set(int index, Long element) {
-        return null;
+        if (index >= size) {
+            throw new IllegalArgumentException("Given index is out of list size.");
+        }
+        Long oldElement = (Long) array[index];
+        array[index] = element;
+        return oldElement;
     }
 
     @Override
@@ -148,7 +130,16 @@ public class MyArrayList implements List<Long> {
 
     @Override
     public Long remove(int index) {
-        return null;
+        if (index >= size) {
+            throw new IllegalArgumentException("Given index is out of list size.");
+        }
+        Long oleElement = (Long) array[index];
+        int numberMoved = size - index - 1;
+        if (numberMoved > 0) {
+            System.arraycopy(array, index + 1, array, index, numberMoved);
+        }
+        array[--size] = null;
+        return oleElement;
     }
 
     @Override
@@ -176,18 +167,4 @@ public class MyArrayList implements List<Long> {
         return null;
     }
 
-    @Override
-    public Spliterator<Long> spliterator() {
-        return null;
-    }
-
-    @Override
-    public Stream<Long> stream() {
-        return null;
-    }
-
-    @Override
-    public Stream<Long> parallelStream() {
-        return null;
-    }
 }
