@@ -11,22 +11,23 @@ public class StreamProcessor {
     public static void main(String[] args) throws IOException {
         String input = "src/main/resources/1000.txt";
         String result = "src/main/resources/result.txt";
-        process(input, result);
+        StreamProcessor streamProcessor = new StreamProcessor();
+        streamProcessor.process(input, result);
     }
 
-    public static void process(String inputFilePath, String resultFilePath) throws IOException {
+    public void process(String inputFilePath, String resultFilePath) throws IOException {
         if (inputFilePath == null) {
-            throw new IllegalArgumentException("Argument cannot be null.");
+            throw new IllegalArgumentException("Input file path cannot be null.");
         }
         if (resultFilePath == null) {
-            throw new IllegalArgumentException("Argument cannot be null.");
+            throw new IllegalArgumentException("Result file path cannot be null.");
         }
         try (PrintWriter pw = new PrintWriter(Files.newBufferedWriter(Paths.get(resultFilePath)))) {
             Files.lines(Paths.get(inputFilePath))
-                    .filter(line -> line.matches("^[ 0-9]+$"))
-                    .map(string -> string.split(" +"))
+                    .filter(line -> line.matches("^[\\s\\d]+$"))
+                    .map(string -> string.split("\\s+"))
                     .map(StreamProcessor::convert)
-                    .forEach(row -> pw.write(row + "\n"));
+                    .forEach(row -> pw.println(row));
         }
     }
 
