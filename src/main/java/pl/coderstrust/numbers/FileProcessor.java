@@ -10,9 +10,9 @@ import java.util.List;
 
 class FileProcessor {
 
-    List<String> readLinesFromFile(String fileName) throws FileProcessorException {
+    List<String> readLinesFromFile(String filePath) throws FileProcessorException {
         List<String> lines = new ArrayList<>();
-        try (BufferedReader reader = Files.newBufferedReader(Paths.get(fileName))) {
+        try (BufferedReader reader = Files.newBufferedReader(Paths.get(filePath))) {
             reader.lines().forEach((lines::add));
         } catch (IOException e) {
             throw new FileProcessorException("Unable to read file. ", e);
