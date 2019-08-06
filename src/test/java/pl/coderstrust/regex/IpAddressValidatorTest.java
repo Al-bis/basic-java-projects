@@ -18,16 +18,9 @@ public class IpAddressValidatorTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    @Parameters(method = "nullArgument")
-    public void shouldThrowExceptionForIllegalArgument(String ipAddress) {
+    public void shouldThrowExceptionForIllegalArgument() {
         thrown.expect(IllegalArgumentException.class);
-        IpAddressValidator.isIpAddress(ipAddress);
-    }
-
-    public Object[] nullArgument() {
-        return new Object[]{
-                new Object[]{null}
-        };
+        IpAddressValidator.isIpAddress(null);
     }
 
     @Test
