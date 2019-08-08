@@ -7,11 +7,12 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import static junit.framework.TestCase.*;
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertFalse;
+import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertArrayEquals;
 
 @RunWith(JUnitParamsRunner.class)
 public class MyArrayListTest {
@@ -56,26 +57,21 @@ public class MyArrayListTest {
     @Test
     public void shouldReturnTrueIfMyArrayListIsEmpty() {
         List<Object> myArrayList = new MyArrayList<>();
-        List<Object> arrayList = new ArrayList<>();
 
         assertTrue(myArrayList.isEmpty());
-        assertEquals(myArrayList.isEmpty(), arrayList.isEmpty());
     }
 
     @Test
     public void shouldReturnFalseIfMyArrayListHasElement() {
         List<Object> myArrayList = new MyArrayList<>();
         myArrayList.add(null);
-        List<Object> arrayList = new ArrayList<>();
-        arrayList.add(null);
 
         assertFalse(myArrayList.isEmpty());
-        assertEquals(myArrayList.isEmpty(), arrayList.isEmpty());
     }
 
     @Test
     @Parameters(method = "myArrayListSizeArguments")
-    public void shouldReturnGivenSizeAfterAddingGivenAmountOfElements(int expectedSize, ArrayList arrayList) {
+    public void shouldReturnGivenSizeAfterAddingGivenAmountOfElements(int expectedSize) {
         List<Long> myArrayList = new MyArrayList<>();
         myArrayList.add(1L);
         myArrayList.add(2L);
@@ -84,12 +80,11 @@ public class MyArrayListTest {
         myArrayList.add(5L);
 
         assertEquals(myArrayList.size(), expectedSize);
-        assertEquals(myArrayList.size(), arrayList.size());
     }
 
     public Object[] myArrayListSizeArguments() {
         return new Object[]{
-                new Object[]{5, new ArrayList<>(Arrays.asList(1L, 2L, 3L, 4L, 5L))}
+                new Object[]{5}
         };
     }
 
@@ -133,6 +128,54 @@ public class MyArrayListTest {
 
         assertEquals(4, myArrayList.size());
         assertEquals((Long) 4L, myArrayList.get(2));
+    }
+
+    @Test
+    @Parameters(method = "myArrayListToArrayArguments")
+    public void shouldReturnArray(Object[] expectedArray) {
+        List<Long> myArrayList = new MyArrayList<>();
+        myArrayList.add(1L);
+        myArrayList.add(2L);
+        myArrayList.add(3L);
+        Object[] array = myArrayList.toArray();
+
+        assertArrayEquals(expectedArray, array);
+    }
+
+    public Object[] myArrayListToArrayArguments() {
+        return new Object[]{
+                new Object[]{new Object[]{1L, 2L, 3L}}
+        };
+    }
+
+    @Test
+    public void shouldRemovedElementBaseOnGivenObject() {
+        List<Long> myArrayList = new MyArrayList<>();
+        Long object = 3L;
+        myArrayList.add(1L);
+        myArrayList.add(2L);
+        myArrayList.add(3L);
+        myArrayList.add(4L);
+        myArrayList.add(5L);
+        myArrayList.remove(object);
+
+        assertEquals(4, myArrayList.size());
+        assertEquals((Long) 4L, myArrayList.get(2));
+    }
+
+    @Test
+    public void shouldClearMyArrayList() {
+        List<Long> myArrayList = new MyArrayList<>();
+        List<Long> emptyMyArrayList = new MyArrayList<>();
+        myArrayList.add(1L);
+        myArrayList.add(2L);
+        myArrayList.add(3L);
+        myArrayList.clear();
+        Object[] myArray = myArrayList.toArray();
+        Object[] myEmptyArray = myArrayList.toArray();
+
+        assertEquals(emptyMyArrayList.size(), myArrayList.size());
+        assertArrayEquals(myEmptyArray, myArray);
     }
 
 }

@@ -1,8 +1,12 @@
 package pl.coderstrust.myArrayList;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
-public class MyArrayList<Long> implements List<Long> {
+public class MyArrayList<T> implements List<T> {
 
     private int size;
     private int capacity;
@@ -17,13 +21,10 @@ public class MyArrayList<Long> implements List<Long> {
     public MyArrayList(int initCapacity) {
         if (initCapacity <= 0) {
             throw new IllegalArgumentException("Illegal capacity:" + initCapacity);
-        } else if (initCapacity < 10) {
-            capacity = 10;
-        } else {
-            size = 0;
-            capacity = initCapacity;
-            array = new Object[capacity];
         }
+        size = 0;
+        capacity = initCapacity;
+        array = new Object[capacity];
     }
 
     @Override
@@ -47,124 +48,176 @@ public class MyArrayList<Long> implements List<Long> {
     }
 
     @Override
-    public Iterator<Long> iterator() {
-        return null;
+    public Iterator<T> iterator() {
+        return new Iter();
     }
 
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        Object[] actualArray = new Object[size];
+        for (int i = 0; i < size; i++) {
+            actualArray[i] = array[i];
+        }
+        return actualArray;
     }
 
     @Override
     public <T> T[] toArray(T[] a) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public boolean add(Long element) {
-        if (size == capacity) {
-            array = Arrays.copyOf(array, capacity * 2);
-        }
+    public boolean add(T element) {
+        resize();
         array[size++] = element;
         return true;
     }
 
+    private void resize() {
+        if (size == capacity) {
+            array = Arrays.copyOf(array, capacity * 2);
+        }
+    }
+
     @Override
     public boolean remove(Object o) {
+        int i = indexOf(o);
+        if (i >= 0) {
+            remove(i);
+            return true;
+        }
         return false;
     }
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public boolean addAll(Collection<? extends Long> c) {
-        return false;
+    public boolean addAll(Collection<? extends T> c) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public boolean addAll(int index, Collection<? extends Long> c) {
-        return false;
+    public boolean addAll(int index, Collection<? extends T> c) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean removeAll(Collection<?> c) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean retainAll(Collection<?> c) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void clear() {
-
+        size = 0;
+        capacity = 10;
+        array = new Object[capacity];
     }
 
     @Override
-    public Long get(int index) {
+    public T get(int index) {
         if (index >= size) {
             throw new IllegalArgumentException("Given index is out of list size.");
         }
-        return (Long) array[index];
+        return (T) array[index];
     }
 
     @Override
-    public Long set(int index, Long element) {
+    public T set(int index, T element) {
         if (index >= size) {
             throw new IllegalArgumentException("Given index is out of list size.");
         }
-        Long oldElement = (Long) array[index];
+        T oldElement = (T) array[index];
         array[index] = element;
         return oldElement;
     }
 
     @Override
-    public void add(int index, Long element) {
-
+    public void add(int index, T element) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public Long remove(int index) {
+    public T remove(int index) {
         if (index >= size) {
             throw new IllegalArgumentException("Given index is out of list size.");
         }
-        Long oleElement = (Long) array[index];
-        int numberMoved = size - index - 1;
-        if (numberMoved > 0) {
-            System.arraycopy(array, index + 1, array, index, numberMoved);
-        }
+        T oleElement = (T) array[index];
+        resize(index);
         array[--size] = null;
         return oleElement;
     }
 
+    private void resize(int index) {
+        int numberMoved = size - index - 1;
+        if (numberMoved > 0) {
+            System.arraycopy(array, index + 1, array, index, numberMoved);
+        }
+    }
+
     @Override
     public int indexOf(Object o) {
-        return 0;
+        if (o == null) {
+            for (int i = 0; i < size; i++) {
+                if (array[i] == null) {
+                    return i;
+                }
+            }
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (o.equals(array[i])) {
+                    return i;
+                }
+            }
+        }
+        return -1;
     }
 
     @Override
     public int lastIndexOf(Object o) {
-        return 0;
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public ListIterator<Long> listIterator() {
-        return null;
+    public ListIterator<T> listIterator() {
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public ListIterator<Long> listIterator(int index) {
-        return null;
+    public ListIterator<T> listIterator(int index) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public List<Long> subList(int fromIndex, int toIndex) {
-        return null;
+    public List<T> subList(int fromIndex, int toIndex) {
+        throw new UnsupportedOperationException();
+    }
+
+    private class Iter implements Iterator<T> {
+
+        int cursor;
+
+        @Override
+        public boolean hasNext() {
+            return cursor != size;
+        }
+
+        @Override
+        public T next() {
+            return (T) array[cursor++];
+        }
+
+        @Override
+        public void remove() {
+            MyArrayList.this.remove(cursor);
+        }
     }
 
 }
