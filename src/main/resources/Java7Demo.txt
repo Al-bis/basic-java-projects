@@ -1,0 +1,2 @@
+This is introduction to Java 7.
+This example show the try with resources.
