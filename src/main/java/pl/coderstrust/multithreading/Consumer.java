@@ -16,18 +16,6 @@ public class Consumer implements Runnable {
     this.id = id;
   }
 
-  public BlockingDeque<String> getContainer() {
-    return container;
-  }
-
-  public long getTime() {
-    return time;
-  }
-
-  public String getId() {
-    return id;
-  }
-
   @Override
   public void run() {
     System.out.println(id + " start: ");
@@ -38,7 +26,9 @@ public class Consumer implements Runnable {
         System.out.println(id + " : " + element);
       } catch (InterruptedException e) {
         e.printStackTrace();
+        break;
       }
     }
   }
+
 }
