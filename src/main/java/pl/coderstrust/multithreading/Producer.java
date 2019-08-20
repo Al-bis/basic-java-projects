@@ -6,11 +6,12 @@ import java.util.concurrent.BlockingDeque;
 
 public class Producer implements Runnable {
 
+  private static final Object COUNT_LOCK = new Object();
+  private static int count = 0;
+
   private BlockingDeque<String> container;
   private long time;
   private String id;
-  private static int count = 0;
-  private static final Object countLock = new Object();
 
   public Producer(BlockingDeque<String> container, long time, String id) {
     this.container = container;
@@ -26,7 +27,7 @@ public class Producer implements Runnable {
         SECONDS.sleep(time);
         container.offer("Value " + count, 100, SECONDS);
         System.out.println(id + " produce : " + count);
-        synchronized (countLock) {
+        synchronized (COUNT_LOCK) {
           count++;
         }
         if (count > 100) {

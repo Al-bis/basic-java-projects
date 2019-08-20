@@ -7,7 +7,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 public class Scenario6 {
 
-  public static void executeScenario() {
+  public static void main(String[] args) {
     BlockingDeque<String> container = new LinkedBlockingDeque<>(10);
     ExecutorService threadPool = Executors.newFixedThreadPool(4);
 
