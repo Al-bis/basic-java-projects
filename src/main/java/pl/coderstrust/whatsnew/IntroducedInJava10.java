@@ -1,4 +1,4 @@
-package pl.coderstrust.whatsNew;
+package pl.coderstrust.whatsnew;
 
 import java.util.ArrayList;
 

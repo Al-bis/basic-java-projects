@@ -1,4 +1,4 @@
-package pl.coderstrust.whatsNew;
+package pl.coderstrust.whatsnew;
 
 public class IntroducedInJava11 {
 
